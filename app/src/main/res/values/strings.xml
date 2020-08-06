@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">Baking App</string>
+    <string name="iv_recipe_image">Recipe image</string>
 </resources>

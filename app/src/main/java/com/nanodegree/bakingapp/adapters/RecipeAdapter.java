@@ -3,6 +3,7 @@ package com.nanodegree.bakingapp.adapters;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -47,11 +48,11 @@ public class RecipeAdapter extends RecyclerView.Adapter<RecipeAdapter.RecipeView
 
         @Nullable
         @BindView(R.id.tv_recipe_name)
-        TextView recipeNameTextView;
+        TextView mRecipeNameTextView;
 
         @Nullable
         @BindView(R.id.iv_recipe_image)
-        ImageView recipeImageView;
+        ImageView mRecipeImageView;
 
         public RecipeViewHolder(@NonNull View itemView) {
             super(itemView);
@@ -69,24 +70,23 @@ public class RecipeAdapter extends RecyclerView.Adapter<RecipeAdapter.RecipeView
     }
 
     @Override
-    public void onBindViewHolder(@NonNull final RecipeAdapter.RecipeViewHolder holder, int position) {
+    public void onBindViewHolder(@NonNull final RecipeViewHolder holder, int position) {
 
         // Set recipe name
-        holder.recipeNameTextView.setText(mRecipeList.get(position).getName());
+        holder.mRecipeNameTextView.setText(mRecipeList.get(position).getName());
 
-        /*
         // Set recipe image
         String recipeImage = mRecipeList.get(position).getImage();
-        if (recipeImage != null) {
+        if (recipeImage.trim().equals("")) {
+            // not_found icon made by <a href="https://www.flaticon.com/authors/pixel-perfect"
+            // title="Pixel perfect">Pixel perfect</a> from <a href="https://www.flaticon.com/"
+            // title="Flaticon"> www.flaticon.com</a>
+            holder.mRecipeImageView.setImageResource(R.drawable.not_found);
+        } else {
             Picasso.get()
                     .load(recipeImage)
-                    .into(holder.recipeImageView);
-        } else {
-            // Icons made by <a href="https://www.flaticon.com/authors/pixelmeetup"
-            // title="Pixelmeetup">Pixelmeetup</a> from <a href="https://www.flaticon.com/"
-            // title="Flaticon">www.flaticon.com</a>
-                holder.recipeImageView.setImageResource(R.drawable.not_found);
-        } */
+                    .into(holder.mRecipeImageView);
+        }
 
         holder.itemView.setOnClickListener(v -> {
             Recipe recipe = mRecipeList.get(holder.getAdapterPosition());
