@@ -10,7 +10,6 @@ import retrofit2.http.GET;
 
 public interface RecipeService {
 
-    //Get list of recipes
-    @GET(AppUtils.BASE_URL)
+    @GET(AppUtils.JSON_LOC)
     Call<ArrayList<Recipe>> getRecipes();
 }

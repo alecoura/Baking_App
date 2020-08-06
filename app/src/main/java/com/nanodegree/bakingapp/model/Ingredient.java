@@ -6,11 +6,11 @@ import android.os.Parcelable;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
-public class Ingredient implements Parcelable{
+public class Ingredient implements Parcelable {
 
     @SerializedName("quantity")
     @Expose
-    private Integer quantity;
+    private Double quantity;
     @SerializedName("measure")
     @Expose
     private String measure;
@@ -18,33 +18,11 @@ public class Ingredient implements Parcelable{
     @Expose
     private String ingredient;
 
-    protected Ingredient(Parcel in) {
-        if (in.readByte() == 0) {
-            quantity = null;
-        } else {
-            quantity = in.readInt();
-        }
-        measure = in.readString();
-        ingredient = in.readString();
-    }
-
-    public static final Creator<Ingredient> CREATOR = new Creator<Ingredient>() {
-        @Override
-        public Ingredient createFromParcel(Parcel in) {
-            return new Ingredient(in);
-        }
-
-        @Override
-        public Ingredient[] newArray(int size) {
-            return new Ingredient[size];
-        }
-    };
-
-    public Integer getQuantity() {
+    public Double getQuantity() {
         return quantity;
     }
 
-    public void setQuantity(Integer quantity) {
+    public void setQuantity(Double quantity) {
         this.quantity = quantity;
     }
 
@@ -71,13 +49,29 @@ public class Ingredient implements Parcelable{
 
     @Override
     public void writeToParcel(Parcel dest, int flags) {
-        if (quantity == null) {
-            dest.writeByte((byte) 0);
-        } else {
-            dest.writeByte((byte) 1);
-            dest.writeInt(quantity);
-        }
-        dest.writeString(measure);
-        dest.writeString(ingredient);
+        dest.writeValue(this.quantity);
+        dest.writeString(this.measure);
+        dest.writeString(this.ingredient);
     }
+
+    public Ingredient() {
+    }
+
+    protected Ingredient(Parcel in) {
+        this.quantity = (Double) in.readValue(Double.class.getClassLoader());
+        this.measure = in.readString();
+        this.ingredient = in.readString();
+    }
+
+    public static final Parcelable.Creator<Ingredient> CREATOR = new Parcelable.Creator<Ingredient>() {
+        @Override
+        public Ingredient createFromParcel(Parcel source) {
+            return new Ingredient(source);
+        }
+
+        @Override
+        public Ingredient[] newArray(int size) {
+            return new Ingredient[size];
+        }
+    };
 }
