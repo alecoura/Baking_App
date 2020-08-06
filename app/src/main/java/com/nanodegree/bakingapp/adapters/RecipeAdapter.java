@@ -90,20 +90,15 @@ public class RecipeAdapter extends RecyclerView.Adapter<RecipeAdapter.RecipeView
 
         holder.itemView.setOnClickListener(v -> {
             Recipe recipe = mRecipeList.get(holder.getAdapterPosition());
-            mRecipeJson = jsonToString(mJsonResult, holder.getAdapterPosition());
-
             ArrayList<Recipe> recipeArrayList = new ArrayList<>();
             recipeArrayList.add(recipe);
+
+            mRecipeJson = jsonToString(mJsonResult, holder.getAdapterPosition());
 
             Intent intent = new Intent(mContext, DetailsActivity.class);
             intent.putParcelableArrayListExtra(AppUtils.RECIPE_INTENT_EXTRA, recipeArrayList);
             intent.putExtra(AppUtils.JSON_RESULT_EXTRA, mRecipeJson);
             mContext.startActivity(intent);
-
-            SharedPreferences.Editor editor = mContext.getSharedPreferences
-                    (AppUtils.SHARED_PREFERENCES, MODE_PRIVATE).edit();
-            editor.putString(AppUtils.JSON_RESULT_EXTRA, mRecipeJson);
-            editor.apply();
         });
     }
 

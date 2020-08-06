@@ -93,7 +93,7 @@ public class MainActivity extends AppCompatActivity {
                 mRecyclerView.setLayoutManager(mLayoutManager);
                 mRecyclerView.setAdapter(mRecipeAdapter);
 
-                Log.d("BAKING_APP", mRecipeArrayList.get(0).getName());
+                Log.d("BAKING_APP", mRecipeArrayList.get(3).getName());
             }
 
             @Override
