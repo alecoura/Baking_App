@@ -3,4 +3,7 @@
     <string name="iv_recipe_image">Recipe image</string>
     <string name="iv_unit_icon">Measure icon</string>
     <string name="btn_preparation">Preparation</string>
+    <string name="iv_video_placeholder">Loading image</string>
+    <string name="btn_next">Next</string>
+    <string name="btn_previous">Previous</string>
 </resources>

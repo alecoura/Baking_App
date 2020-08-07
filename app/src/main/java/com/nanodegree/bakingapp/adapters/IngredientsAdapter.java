@@ -1,11 +1,9 @@
 package com.nanodegree.bakingapp.adapters;
 
 import android.content.Context;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -21,12 +19,12 @@ import java.util.List;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
-public class DetailsAdapter extends RecyclerView.Adapter<DetailsAdapter.DetailsViewHolder> {
+public class IngredientsAdapter extends RecyclerView.Adapter<IngredientsAdapter.DetailsViewHolder> {
 
     private final Context mContext;
     private final List<Ingredient> mIngredientList;
 
-    public DetailsAdapter(Context context, List<Ingredient> ingredientList) {
+    public IngredientsAdapter(Context context, List<Ingredient> ingredientList) {
         this.mContext = context;
         this.mIngredientList = ingredientList;
     }

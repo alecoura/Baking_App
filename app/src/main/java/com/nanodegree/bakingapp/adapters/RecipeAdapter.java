@@ -2,8 +2,6 @@ package com.nanodegree.bakingapp.adapters;
 
 import android.content.Context;
 import android.content.Intent;
-import android.content.SharedPreferences;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -17,7 +15,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonParser;
-import com.nanodegree.bakingapp.activities.DetailsActivity;
+import com.nanodegree.bakingapp.activities.IngredientsActivity;
 import com.nanodegree.bakingapp.R;
 import com.nanodegree.bakingapp.Utils.AppUtils;
 import com.nanodegree.bakingapp.model.Recipe;
@@ -28,8 +26,6 @@ import java.util.ArrayList;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
-
-import static android.content.Context.MODE_PRIVATE;
 
 public class RecipeAdapter extends RecyclerView.Adapter<RecipeAdapter.RecipeViewHolder> {
 
@@ -81,7 +77,7 @@ public class RecipeAdapter extends RecyclerView.Adapter<RecipeAdapter.RecipeView
             // not_found icon made by <a href="https://www.flaticon.com/authors/pixel-perfect"
             // title="Pixel perfect">Pixel perfect</a> from <a href="https://www.flaticon.com/"
             // title="Flaticon"> www.flaticon.com</a>
-            holder.mRecipeImageView.setImageResource(R.drawable.measure);
+            holder.mRecipeImageView.setImageResource(R.drawable.recipe_icon);
         } else {
             Picasso.get()
                     .load(recipeImage)
@@ -95,7 +91,7 @@ public class RecipeAdapter extends RecyclerView.Adapter<RecipeAdapter.RecipeView
 
             mRecipeJson = jsonToString(mJsonResult, holder.getAdapterPosition());
 
-            Intent intent = new Intent(mContext, DetailsActivity.class);
+            Intent intent = new Intent(mContext, IngredientsActivity.class);
             intent.putParcelableArrayListExtra(AppUtils.RECIPE_INTENT_EXTRA, recipeArrayList);
             intent.putExtra(AppUtils.JSON_RESULT_EXTRA, mRecipeJson);
             mContext.startActivity(intent);

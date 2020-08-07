@@ -12,6 +12,7 @@ public class AppUtils {
     public static final String RECIPE_ARRAY_LIST_STATE = "recipe_arraylist_state";
     public static final String WIDGET_EXTRA = "widget_extra";
     public static final String STEP_INTENT_EXTRA = "step_intent_extra";
+    public static final String STEP_SINGLE = "step_single";
 
     public static String [] units = {"CUP","TBLSP","TSP","G","K","OZ","UNIT"};
     public static String [] unitName = {"Cup","Tablespoon","Teaspoon","Gram","Kilogram","Ounce","Unit"};

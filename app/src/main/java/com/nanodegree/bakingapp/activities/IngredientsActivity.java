@@ -4,7 +4,6 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.MenuItem;
-import android.view.View;
 import android.widget.Button;
 
 import androidx.annotation.NonNull;
@@ -17,7 +16,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.google.gson.Gson;
 import com.nanodegree.bakingapp.R;
 import com.nanodegree.bakingapp.Utils.AppUtils;
-import com.nanodegree.bakingapp.adapters.DetailsAdapter;
+import com.nanodegree.bakingapp.adapters.IngredientsAdapter;
 import com.nanodegree.bakingapp.model.Ingredient;
 import com.nanodegree.bakingapp.model.Recipe;
 import com.nanodegree.bakingapp.model.Step;
@@ -28,7 +27,7 @@ import java.util.List;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
-public class DetailsActivity extends AppCompatActivity {
+public class IngredientsActivity extends AppCompatActivity {
 
     public static final String RECIPE_LIST_STATE = "recipe_details_list";
     public static final String RECIPE_JSON_STATE = "recipe_json_list";
@@ -39,7 +38,7 @@ public class DetailsActivity extends AppCompatActivity {
     @BindView(R.id.btn_preparation)
     Button mButtonStartCooking;
 
-    DetailsAdapter mRecipeDetailsAdapter;
+    IngredientsAdapter mRecipeIngredientsAdapter;
     ArrayList<Recipe> mRecipeArrayList;
     ArrayList<Step> mStepArrayList;
     String mJsonResult;
@@ -81,7 +80,7 @@ public class DetailsActivity extends AppCompatActivity {
             mIngredientList = mRecipeArrayList.get(0).getIngredients();
         }
 
-        mRecipeDetailsAdapter = new DetailsAdapter(this, mIngredientList);
+        mRecipeIngredientsAdapter = new IngredientsAdapter(this, mIngredientList);
 
         RecyclerView.LayoutManager mLayoutManager;
         if (mTwoPane) {
@@ -90,10 +89,10 @@ public class DetailsActivity extends AppCompatActivity {
             mLayoutManager = new LinearLayoutManager(this);
         }
         mRecyclerView.setLayoutManager(mLayoutManager);
-        mRecyclerView.setAdapter(mRecipeDetailsAdapter);
+        mRecyclerView.setAdapter(mRecipeIngredientsAdapter);
 
         mButtonStartCooking.setOnClickListener(v -> {
-            Intent intent = new Intent(DetailsActivity.this, DetailsActivity.class);
+            Intent intent = new Intent(IngredientsActivity.this, PreparationActivity.class);
             intent.putParcelableArrayListExtra(AppUtils.STEP_INTENT_EXTRA, mStepArrayList);
             intent.putExtra(AppUtils.JSON_RESULT_EXTRA, mJsonResult);
             startActivity(intent);
