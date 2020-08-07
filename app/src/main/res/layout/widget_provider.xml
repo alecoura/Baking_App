@@ -11,6 +11,7 @@
         android:layout_height="91dp"
         android:layout_alignParentTop="true"
         android:layout_centerInParent="true"
+        android:layout_marginTop="19dp"
         android:contentDescription="Recipe icon"
         android:src="@drawable/recipe_icon" />
 

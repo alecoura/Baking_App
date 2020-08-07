@@ -11,6 +11,7 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Build;
 
+import androidx.annotation.NonNull;
 import androidx.core.app.NotificationCompat;
 import androidx.core.content.ContextCompat;
 
@@ -22,17 +23,18 @@ import com.nanodegree.bakingapp.model.Recipe;
 
 import java.util.List;
 
-public class WidgetService extends IntentService {
+public class RecipeWidgetService extends IntentService {
 
     public static final String ACTION_OPEN_RECIPE =
-            "com.nanodegree.bakinapp.widget.widget_service";
+            "com.nanodegree.bakinapp.widget.recipe_widget_service";
 
-    public WidgetService(String name) {
+
+    public RecipeWidgetService(String name) {
         super(name);
     }
 
-    public WidgetService() {
-        super("BakingAppWidgetService");
+    public RecipeWidgetService() {
+        super("RecipeWidgetService");
     }
 
     @Override
@@ -44,8 +46,7 @@ public class WidgetService extends IntentService {
                     "Baking App service",
                     NotificationManager.IMPORTANCE_DEFAULT);
 
-            ((NotificationManager) getSystemService(NOTIFICATION_SERVICE))
-                    .createNotificationChannel(channel);
+            ((NotificationManager) getSystemService(NOTIFICATION_SERVICE)).createNotificationChannel(channel);
 
             Notification notification = new NotificationCompat.Builder(this, CHANNEL_ID)
                     .setContentTitle("")
@@ -74,34 +75,29 @@ public class WidgetService extends IntentService {
         Recipe recipe = gson.fromJson(jsonRecipe, Recipe.class);
 
         List<Ingredient> ingredientList = recipe.getIngredients();
-
         for (Ingredient ingredient : ingredientList) {
             String quantity = String.valueOf(ingredient.getQuantity());
             String measure = ingredient.getMeasure();
             String ingredientName = ingredient.getIngredient();
             String line = quantity + " " + measure + " " + ingredientName;
-            stringBuilder.append(line).append("\n");
+            stringBuilder.append(line + "\n");
         }
-
         String ingredientsString = stringBuilder.toString();
-
         AppWidgetManager appWidgetManager = AppWidgetManager.getInstance(this);
-
-        int[] appWidgetIds = appWidgetManager
-                .getAppWidgetIds(new ComponentName(this, WidgetProvider.class));
-
-        WidgetProvider.updateWidgetRecipe(this, ingredientsString, R.drawable.recipe_icon,
-                appWidgetManager, appWidgetIds);
+        int[] appWidgetIds = appWidgetManager.getAppWidgetIds(new ComponentName(this,
+                RecipeWidgetProvider.class));
+        RecipeWidgetProvider.updateWidgetRecipe(this, ingredientsString,
+                R.drawable.recipe_icon, appWidgetManager, appWidgetIds);
     }
 
     public static void startActionOpenRecipe(Context context) {
-        Intent intent = new Intent(context, WidgetService.class);
+        Intent intent = new Intent(context, RecipeWidgetService.class);
         intent.setAction(ACTION_OPEN_RECIPE);
         context.startService(intent);
     }
 
     public static void startActionOpenRecipeO(Context context) {
-        Intent intent = new Intent(context, WidgetService.class);
+        Intent intent = new Intent(context, RecipeWidgetService.class);
         intent.setAction(ACTION_OPEN_RECIPE);
         ContextCompat.startForegroundService(context, intent);
     }

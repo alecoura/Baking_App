@@ -2,6 +2,8 @@ package com.nanodegree.bakingapp.adapters;
 
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
+import android.os.Build;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -19,6 +21,7 @@ import com.nanodegree.bakingapp.activities.IngredientsActivity;
 import com.nanodegree.bakingapp.R;
 import com.nanodegree.bakingapp.Utils.AppUtils;
 import com.nanodegree.bakingapp.model.Recipe;
+import com.nanodegree.bakingapp.widget.RecipeWidgetService;
 import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
@@ -26,6 +29,8 @@ import java.util.ArrayList;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+
+import static android.content.Context.MODE_PRIVATE;
 
 public class RecipeAdapter extends RecyclerView.Adapter<RecipeAdapter.RecipeViewHolder> {
 
@@ -95,6 +100,17 @@ public class RecipeAdapter extends RecyclerView.Adapter<RecipeAdapter.RecipeView
             intent.putParcelableArrayListExtra(AppUtils.RECIPE_INTENT_EXTRA, recipeArrayList);
             intent.putExtra(AppUtils.JSON_RESULT_EXTRA, mRecipeJson);
             mContext.startActivity(intent);
+
+            SharedPreferences.Editor editor = mContext.getSharedPreferences(AppUtils
+                    .SHARED_PREFERENCES, MODE_PRIVATE).edit();
+            editor.putString(AppUtils.JSON_RESULT_EXTRA, mRecipeJson);
+            editor.apply();
+
+            if (Build.VERSION.SDK_INT > 25) {
+                RecipeWidgetService.startActionOpenRecipeO(mContext);
+            } else {
+                RecipeWidgetService.startActionOpenRecipe(mContext);
+            }
         });
     }
 

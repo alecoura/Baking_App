@@ -49,9 +49,6 @@ public class VideoPlayerFragment extends Fragment {
     @BindView(R.id.tv_step_description)
     TextView mStepDescription;
 
-    @BindView(R.id.iv_video_placeholder)
-    ImageView mImageViewPlaceholder;
-
     SimpleExoPlayer mSimpleExoPlayer;
 
     Step mStep;
@@ -90,7 +87,6 @@ public class VideoPlayerFragment extends Fragment {
         else {
             if (getArguments() != null) {
 
-                mImageViewPlaceholder.setVisibility(View.GONE);
                 mPlayerView.setVisibility(View.VISIBLE);
 
                 // Get arguments
@@ -103,10 +99,8 @@ public class VideoPlayerFragment extends Fragment {
                         if (mStep.getThumbnailURL().equals("")) {
                             // If no video or thumbnail, use placeholder image
                             mPlayerView.setUseArtwork(true);
-                            mImageViewPlaceholder.setVisibility(View.VISIBLE);
                             mPlayerView.setUseController(false);
                         } else {
-                            mImageViewPlaceholder.setVisibility(View.GONE);
                             mPlayerView.setVisibility(View.VISIBLE);
                             mVideoThumbnail = mStep.getThumbnailURL();
                             mVideoThumbnailImage = ThumbnailUtils.createVideoThumbnail(mVideoThumbnail, MediaStore.Video.Thumbnails.MICRO_KIND);
