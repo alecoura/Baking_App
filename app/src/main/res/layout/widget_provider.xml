@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="@dimen/widget_margin"
+    android:background="@color/colorWidgetBackground">
+
+    <ImageView
+        android:id="@+id/iv_widget_recipe_icon"
+        android:layout_width="120dp"
+        android:layout_height="91dp"
+        android:layout_alignParentTop="true"
+        android:layout_centerInParent="true"
+        android:contentDescription="Recipe icon"
+        android:src="@drawable/recipe_icon" />
+
+    <TextView
+        android:id="@+id/widget_ingredients"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/iv_widget_recipe_icon"
+        android:layout_centerHorizontal="true"
+        android:layout_centerVertical="true"
+        android:layout_margin="8dp"
+        android:background="@color/colorWidgetBackground"
+        android:textAlignment="viewStart"
+        android:textAllCaps="false"
+        android:textColor="#ffffff"
+        android:textSize="12sp"
+        android:text="The ingredients of your last recipe will open here!"
+        android:gravity="start" />
+
+</RelativeLayout>
