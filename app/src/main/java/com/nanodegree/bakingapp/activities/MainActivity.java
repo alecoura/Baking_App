@@ -45,6 +45,7 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         ButterKnife.bind(this);
+        mTwoPane = findViewById(R.id.recipe_tablet) != null;
 
         if (savedInstanceState != null) {
             mJsonResult = savedInstanceState.getString(AppUtils.RECIPE_JSON_STATE);

@@ -81,7 +81,7 @@ public class RecipeAdapter extends RecyclerView.Adapter<RecipeAdapter.RecipeView
             // not_found icon made by <a href="https://www.flaticon.com/authors/pixel-perfect"
             // title="Pixel perfect">Pixel perfect</a> from <a href="https://www.flaticon.com/"
             // title="Flaticon"> www.flaticon.com</a>
-            holder.mRecipeImageView.setImageResource(R.drawable.not_found);
+            holder.mRecipeImageView.setImageResource(R.drawable.measure);
         } else {
             Picasso.get()
                     .load(recipeImage)
