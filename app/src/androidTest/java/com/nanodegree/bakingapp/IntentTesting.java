@@ -40,8 +40,6 @@ public class IntentTesting {
 
     @Before
     public void stubAllExternalIntents() {
-        // By default Espresso Intents does not stub any Intents. Stubbing needs to be setup before
-        // every test run. In this case all external Intents will be blocked.
         intending(not(isInternal())).respondWith(new Instrumentation.ActivityResult(Activity.RESULT_OK, null));
     }
 
@@ -55,19 +53,19 @@ public class IntentTesting {
             e.printStackTrace();
         }
 
-        //Recyclerview scroll to position
+        // Recyclerview scroll to position
         onView(withId(R.id.rv_recipe)).perform(RecyclerViewActions.scrollToPosition(4));
 
-        //Perform Recyclerview click on item at position
+        // Perform Recyclerview click on item at position
         onView(withId(R.id.rv_recipe)).perform(RecyclerViewActions.actionOnItemAtPosition(0, click()));
 
-        //Check if intent (RecipeActivity to RecipeDetailsActivity) has RECIPE_INTENT_EXTRA
+        // Check if intent (RecipeActivity to RecipeDetailsActivity) has RECIPE_INTENT_EXTRA
         intended(hasExtraWithKey(AppUtils.RECIPE_INTENT_EXTRA));
 
-        //Perform click action on start cooking button
+        // Perform click action on start cooking button
         onView(withId(R.id.btn_preparation)).perform(click());
 
-        //Check if intent (RecipeDetailsActivity to CookingActivity) has RECIPE_INTENT_EXTRA
+        // Check if intent (RecipeDetailsActivity to CookingActivity) has RECIPE_INTENT_EXTRA
         intended(hasComponent(PreparationActivity.class.getName()));
     }
 
