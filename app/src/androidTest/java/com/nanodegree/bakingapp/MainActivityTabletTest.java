@@ -19,7 +19,7 @@ import static androidx.test.espresso.matcher.ViewMatchers.isDisplayed;
 
 @LargeTest
 @RunWith(AndroidJUnit4.class)
-class RecipeActivityTabletTest {
+class MainActivityTabletTest {
 
     @Rule
     public ActivityTestRule<MainActivity> mActivityTestRule = new ActivityTestRule<>(MainActivity.class);

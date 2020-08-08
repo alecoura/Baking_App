@@ -1,10 +1,13 @@
 package com.nanodegree.bakingapp.activities;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.annotation.VisibleForTesting;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+import androidx.test.espresso.IdlingResource;
 
 import android.os.Bundle;
 import android.util.Log;
@@ -16,6 +19,7 @@ import com.nanodegree.bakingapp.Utils.AppUtils;
 import com.nanodegree.bakingapp.Utils.NetworkUtils;
 import com.nanodegree.bakingapp.adapters.RecipeAdapter;
 import com.nanodegree.bakingapp.model.Recipe;
+import com.nanodegree.bakingapp.uitest.SimpleIdlingResource;
 
 import java.util.ArrayList;
 
@@ -39,6 +43,18 @@ public class MainActivity extends AppCompatActivity {
     @BindView(R.id.rv_recipe)
     RecyclerView mRecyclerView;
 
+    @Nullable
+    private SimpleIdlingResource mIdlingResource;
+
+    @VisibleForTesting
+    @NonNull
+    public IdlingResource getIdlingResource() {
+        if (mIdlingResource == null) {
+            mIdlingResource = new SimpleIdlingResource();
+        }
+        return mIdlingResource;
+    }
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -46,6 +62,7 @@ public class MainActivity extends AppCompatActivity {
 
         ButterKnife.bind(this);
         mTwoPane = findViewById(R.id.recipe_tablet) != null;
+        getIdlingResource();
 
         if (savedInstanceState != null) {
             mJsonResult = savedInstanceState.getString(AppUtils.RECIPE_JSON_STATE);
