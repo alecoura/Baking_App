@@ -94,6 +94,8 @@ public class MainActivity extends AppCompatActivity {
 
         RecipeService request = retrofit.create(RecipeService.class);
 
+        mIdlingResource.setIdleState(false);
+
         Call<ArrayList<Recipe>> call = request.getRecipes();
         call.enqueue(new Callback<ArrayList<Recipe>>() {
             @Override
@@ -119,7 +121,10 @@ public class MainActivity extends AppCompatActivity {
                 Log.d("BAKING_APP", t.toString());
             }
         });
+
+        mIdlingResource.setIdleState(true);
     }
+
 
     @Override
     protected void onSaveInstanceState(@NonNull Bundle outState) {
